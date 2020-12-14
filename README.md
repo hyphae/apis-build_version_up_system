@@ -23,4 +23,4 @@
 
 
 ## Notice
-&emsp;[Notice](https://github.com/SonyCSL/apis-ccc/blob/master/NOTICE.md)
+&emsp;[Notice](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/NOTICE.md)
