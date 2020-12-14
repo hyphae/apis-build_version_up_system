@@ -19,7 +19,7 @@
 
 
 ## License
-&emsp;[Apache License Version 2.0](https://github.com/SonyCSL/apis-ccc/blob/master/LICENSE)
+&emsp;[Apache License Version 2.0](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/LICENSE)
 
 
 ## Notice
