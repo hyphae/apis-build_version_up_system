@@ -1,0 +1,139 @@
+
+#
+# Execute copy setup files apis-main at COP
+#
+
+if [ $# -ne 7 ]; then
+  echo "Usage: bash main-setupfiles.exp sshPassphrase interface hostName account version unitId workDir"
+  exit 1
+fi
+
+sshPassphrase=$1
+interface=$2
+hostName=$3
+account=$4
+version=$5
+unitId=$6
+workDir=$7
+
+echo "`date`"
+echo "START : main-setupfiles.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${unitId} ${workDir}"
+
+if echo "${hostName}" | grep -q ':' ; then
+  SSH_HOST=${hostName}%${interface}
+  SCP_HOST=\\[${hostName}%${interface}\\]
+else
+  SSH_HOST=${hostName}
+  SCP_HOST=${hostName}
+fi
+
+expect -c "
+set timeout -1
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-start.sh ${account}@${SCP_HOST}:apis-main/start.sh
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-stop.sh ${account}@${SCP_HOST}:apis-main/stop.sh
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-kill.sh ${account}@${SCP_HOST}:apis-main/kill.sh
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/main-logging.properties ${account}@${SCP_HOST}:apis-main/logging.properties
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-cluster.xml ${account}@${SCP_HOST}:apis-main/cluster.xml
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-cluster.xml.encrypted ${account}@${SCP_HOST}:apis-main/cluster.xml.encrypted
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-config.json ${account}@${SCP_HOST}:apis-main/config.json
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-hwConfig.json ${account}@${SCP_HOST}:apis-main/hwConfig.json
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/${unitId}.main-scenario.json ${account}@${SCP_HOST}:apis-main/scenario.json
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/main-policy.json ${account}@${SCP_HOST}:apis-main/policy.json
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+"
+
+echo ""
+echo "END   : main-setupfiles.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${unitId} ${workDir}"
+echo "`date`"
+echo ""
+
+exit 0

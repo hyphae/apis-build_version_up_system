@@ -1,0 +1,21 @@
+@import scala.xml.Node
+
+@(community: Node, cop: Node, version: String)
+
+echo 'call start.sh'
+
+get_pids() {
+ ps -f -U `whoami` | grep apis-log | grep java | while read _USER_ _PID_ _OTHERS_; do
+  echo $_PID_
+ done
+}
+
+_PIDS_=`get_pids`
+if [ -n "$_PIDS_" ] ; then
+ echo '... already running'
+ exit 1
+fi
+
+java @((community \ "start" \ "apis-log" \ "jvmOption").text) @((cop \ "start" \ "apis-log" \ "jvmOption").text) -Duser.timezone=Asia/Tokyo -Djava.util.logging.config.file=./logging.properties -jar ./apis-log-@version-fat.jar -conf ./config.json @((community \ "start" \ "apis-log" \ "vertxOption").text) @((cop \ "start" \ "apis-log" \ "vertxOption").text) &
+
+echo '... done'

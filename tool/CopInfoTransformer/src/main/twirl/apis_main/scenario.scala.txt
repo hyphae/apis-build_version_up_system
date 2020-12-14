@@ -1,0 +1,17 @@
+@import scala.xml.Node
+
+@(community: Node, cop: Node)
+
+{
+	"#" : "place this file at the path defined by 'scenarioFile' in config file",
+
+	"refreshingPeriodMsec" : @if((cop \ "scenario" \ "refreshingPeriodMsec").text.nonEmpty) {@((cop \ "scenario" \ "refreshingPeriodMsec").text)} else {@((community \ "scenario" \ "refreshingPeriodMsec").text)},
+
+	"acceptSelection" : {
+		"strategy" : "@if((cop \ "scenario" \ "acceptSelection" \ "strategy").text.nonEmpty) {@((cop \ "scenario" \ "acceptSelection" \ "strategy").text)} else {@((community \ "scenario" \ "acceptSelection" \ "strategy").text)}"
+	},
+
+	@if((cop \ "scenario" \ "content").text.nonEmpty) {@((cop \ "scenario" \ "content").text)} else {@((community \ "scenario" \ "content").text)}
+
+	"#" : "end"
+}

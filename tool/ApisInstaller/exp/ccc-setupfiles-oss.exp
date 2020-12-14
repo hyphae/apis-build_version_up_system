@@ -1,0 +1,108 @@
+
+#
+# Execute copy setup files apis-ccc at COP
+#
+
+if [ $# -ne 6 ]; then
+  echo "Usage: bash ccc-setupfiles.exp sshPassphrase interface hostName account version workDir"
+  exit 1
+fi
+
+sshPassphrase=$1
+interface=$2
+hostName=$3
+account=$4
+version=$5
+workDir=$6
+
+echo "`date`"
+echo "START : ccc-setupfiles.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${workDir}"
+
+if echo "${hostName}" | grep -q ':' ; then
+  SSH_HOST=${hostName}%${interface}
+  SCP_HOST=\\[${hostName}%${interface}\\]
+else
+  SSH_HOST=${hostName}
+  SCP_HOST=${hostName}
+fi
+
+expect -c "
+set timeout -1
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/ccc-start.sh ${account}@${SCP_HOST}:apis-ccc/start.sh
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/ccc-stop.sh ${account}@${SCP_HOST}:apis-ccc/stop.sh
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/ccc-kill.sh ${account}@${SCP_HOST}:apis-ccc/kill.sh
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/ccc-logging.properties ${account}@${SCP_HOST}:apis-ccc/logging.properties
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/ccc-cluster.xml ${account}@${SCP_HOST}:apis-ccc/cluster.xml
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/ccc-cluster.xml.encrypted ${account}@${SCP_HOST}:apis-ccc/cluster.xml.encrypted
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/ccc-config.json ${account}@${SCP_HOST}:apis-ccc/config.json
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+"
+
+echo ""
+echo "END   : ccc-setupfiles.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${workDir}"
+echo "`date`"
+echo ""
+
+exit 0

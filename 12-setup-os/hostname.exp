@@ -1,0 +1,80 @@
+#!/usr/bin/expect
+
+set ADDRESS [lindex $argv 0]
+set HOSTNAME [lindex $argv 1]
+set ROOTPASS [lindex $argv 2]
+set TIMEOUT 15
+set Prompt "root@"
+
+set timeout -1
+
+spawn env LANG=C ssh -o ConnectTimeout=${TIMEOUT} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${ADDRESS}
+expect {
+	-glob "assword:" {
+		set timeout ${TIMEOUT}
+		send -- "${ROOTPASS}\n"
+		exp_continue
+	}
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "date\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "cp -p /etc/hostname /etc/hostname.bak.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "echo ${HOSTNAME} > /tmp/hostname.tmp.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "mv /tmp/hostname.tmp.apis /etc/hostname\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "hostname -F /etc/hostname\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "cp -p /etc/hosts /etc/hosts.bak.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "echo \"127.0.0.1       ${HOSTNAME} localhost\" > /tmp/hosts.tmp.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "sed -e '/^127.0.0.1\\s/d' /etc/hosts >> /tmp/hosts.tmp.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "mv /tmp/hosts.tmp.apis /etc/hosts\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "exit\n"
+	}
+}

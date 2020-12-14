@@ -1,0 +1,13 @@
+cop-*.xml
+*-cluster.xml
+*-logging.properties
+*-start.sh
+*-stop.sh
+*-kill.sh
+*.json
+*.log
+*.tar.gz
+*.encrypted
+CopInfoTransformer-*
+products
+attachments

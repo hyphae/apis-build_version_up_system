@@ -1,0 +1,59 @@
+
+#
+# Set operation mode
+#
+
+if [ $# -ne 8 ]; then
+  echo "Usage: bash main-operationmode.exp sshPassphrase interface hostName account version unitId mode budoEmulatorPort"
+  exit 1
+fi
+
+sshPassphrase=$1
+interface=$2
+hostName=$3
+account=$4
+version=$5
+unitId=$6
+mode=$7
+budoEmulatorPort=$8
+
+echo "`date`"
+echo "START : main-operationmode.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${unitId} ${mode} ${budoEmulatorPort}"
+
+if echo "${hostName}" | grep -q ':' ; then
+  SSH_HOST=${hostName}%${interface}
+  SCP_HOST=\\[${hostName}%${interface}\\]
+else
+  SSH_HOST=${hostName}
+  SCP_HOST=${hostName}
+fi
+
+prompt="${account}@.*$"
+commandNotFound="command not found"
+
+expect -c "
+set timeout 30
+
+spawn ssh -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${account}@${SSH_HOST}
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    exp_continue
+  }
+  -regexp \"${prompt}\" {
+    send \"curl 'http://localhost:${budoEmulatorPort}/setOperationMode?unitId=${unitId}&value=${mode}'\n\"
+    expect {
+      -regexp \"${prompt}\" {
+        send \"logout\n\"
+      }
+    }
+  }
+}
+"
+
+echo ""
+echo "END   : main-operationmode.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${unitId} ${mode} ${budoEmulatorPort}"
+echo "`date`"
+echo ""
+
+exit 0

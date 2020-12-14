@@ -1,0 +1,32 @@
+@import scala.xml.Node
+
+@(community: Node)
+
+handlers = java.util.logging.ConsoleHandler,java.util.logging.FileHandler,jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler,jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler
+
+java.util.logging.ConsoleHandler.formatter = io.vertx.core.logging.VertxLoggerFormatter
+java.util.logging.ConsoleHandler.level = @((community \ "logging" \ "apis-web" \ "console" \ "level").text)
+
+java.util.logging.FileHandler.formatter = io.vertx.core.logging.VertxLoggerFormatter
+java.util.logging.FileHandler.level = @((community \ "logging" \ "apis-web" \ "file" \ "level").text)
+java.util.logging.FileHandler.pattern = ./%u.%g.log
+java.util.logging.FileHandler.limit = @((community \ "logging" \ "apis-web" \ "file" \ "limit").text)
+java.util.logging.FileHandler.count = @((community \ "logging" \ "apis-web" \ "file" \ "count").text)
+
+jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.formatter = io.vertx.core.logging.VertxLoggerFormatter
+jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.level = @((community \ "logging" \ "apis-web" \ "anotherFile" \ "level").text)
+jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.pattern = ./%u.%g.err
+jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.limit = @((community \ "logging" \ "apis-web" \ "anotherFile" \ "limit").text)
+jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.count = @((community \ "logging" \ "apis-web" \ "anotherFile" \ "count").text)
+
+jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.formatter = jp.co.sony.csl.dcoes.apis.common.util.vertx.ApisLoggerFormatter
+jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.level = @((community \ "logging" \ "apis-web" \ "multicast" \ "level").text)
+jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.groupAddress = @((community \ "logging" \ "multicast" \ "groupAddress").text)
+jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.port = @((community \ "logging" \ "multicast" \ "port").text)
+
+.level = INFO
+io.vertx.ext.apex.level = FINEST
+io.vertx.level = INFO
+com.hazelcast.level = INFO
+io.netty.util.internal.PlatformDependent.level = SEVERE
+jp.co.sony.csl.dcoes.level = ALL

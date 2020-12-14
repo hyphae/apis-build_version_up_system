@@ -1,0 +1,73 @@
+#!/usr/bin/expect
+
+set ADDRESS [lindex $argv 0]
+set ROOTPASS [lindex $argv 1]
+set TIMEOUT 15
+set Prompt "root@"
+
+set timeout -1
+
+spawn env LANG=C ssh -o ConnectTimeout=${TIMEOUT} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@${ADDRESS}
+expect {
+	-glob "assword:" {
+		set timeout ${TIMEOUT}
+		send -- "${ROOTPASS}\n"
+		exp_continue
+	}
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "date\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "cp -p /etc/rsyslog.conf /etc/rsyslog.conf.bak.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "sed -e 's/^\\*\\.\\*;auth,authpriv\\.none\\(\[ \\t\]\\)/*.warn;auth,authpriv.none\\1/g' -e 's/^daemon\\.\\*\\(\[ \\t\]\\)/daemon.warn\\1/g' -e 's/^kern\\.\\*\\(\[ \\t\]\\)/kern.warn\\1/g' /etc/rsyslog.conf > /tmp/rsyslog.conf.tmp.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "mv /tmp/rsyslog.conf.tmp.apis /etc/rsyslog.conf\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "/etc/init.d/rsyslog restart\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "cp -p /etc/logrotate.d/rsyslog /etc/logrotate.d/rsyslog.bak.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "sed -e 's/^\\(\[ \\t\]\\)rotate 7$/\\1rotate 0/g' -e '/^\\(\[ \\t\]\\)rotate 4$/a \\\\tsize 1M' -e 's/^\\(\[ \\t\]\\)rotate 4$/\\1rotate 0/g' /etc/logrotate.d/rsyslog > /tmp/rsyslog.tmp.apis\n"
+	}
+}
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "mv /tmp/rsyslog.tmp.apis /etc/logrotate.d/rsyslog\n"
+	}
+}
+
+expect {
+	-glob "${Prompt}" {
+		set timeout ${TIMEOUT}
+		send "exit\n"
+	}
+}
