@@ -1,0 +1,61 @@
+
+#
+# Execute retrieve logs apis-main from COP
+#
+
+if [ $# -ne 7 ]; then
+  echo "Usage: bash main-retrievelogs.exp sshPassphrase interface hostName account version unitId destinationPath"
+  exit 1
+fi
+
+sshPassphrase=$1
+interface=$2
+hostName=$3
+account=$4
+version=$5
+unitId=$6
+destinationPath=$7
+
+echo "`date`"
+echo "START : main-retrievelogs.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${unitId} ${destinationPath}"
+
+if echo "${hostName}" | grep -q ':' ; then
+  SSH_HOST=${hostName}%${interface}
+  SCP_HOST=\\[${hostName}%${interface}\\]
+else
+  SSH_HOST=${hostName}
+  SCP_HOST=${hostName}
+fi
+
+mkdir -p ${destinationPath}/apis-main/${unitId}/
+
+expect -c "
+set timeout -1
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${account}@${SCP_HOST}:apis-main/*.log ${destinationPath}/apis-main/${unitId}/
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p ${account}@${SCP_HOST}:apis-main/*.err ${destinationPath}/apis-main/${unitId}/
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+"
+
+echo ""
+echo "END   : main-retrievelogs.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${unitId} ${destinationPath}"
+echo "`date`"
+echo ""
+
+exit 0

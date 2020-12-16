@@ -1,0 +1,75 @@
+@import scala.xml.Node
+
+@(community: Node, cop: Node, encryptor: java.text.Format)
+
+{
+	"#" : "start vertx or fat jar with option '-conf path/to/config_file.json'",
+
+	"programId" : "apis-main",
+
+	"communityId" : "@((community \ "communityId").text)",
+	"clusterId" : "@((community \ "cluster" \ "clusterId").text)",
+
+	"security" : {
+		"enabled" : @((community \ "cluster" \ "security" \ "enabled").text),
+		"pemKeyFile" : "./key.pem",
+		"pemCertFile" : "./cert.pem"
+	},
+
+	"unitId" : "@((cop \ "unitId").text)",
+	"unitName" : "@((cop \ "unitName").text)",
+	"serialNumber" : "@((cop \ "serialNumber").text)",
+
+	"systemType" : "@if((cop \ "systemType").text.nonEmpty) {@((cop \ "systemType").text)} else {@((community \ "systemType").text)}",
+
+	"hwConfigFile" : "./hwConfig.json",
+	"policyFile" : "./policy.json",
+	"scenarioFile" : "./scenario.json",
+	"stateFileFormat" : "@if((cop \ "stateFileFormat").text.nonEmpty) {@((cop \ "stateFileFormat").text)} else {@((community \ "stateFileFormat").text)}",
+	"dealLogDirFormat" : "@if((cop \ "dealLogDirFormat").text.nonEmpty) {@((cop \ "dealLogDirFormat").text)} else {@((community \ "dealLogDirFormat").text)}",
+	"fileSystemExclusiveLockFileFormat" : "@((community \ "fileSystemExclusiveLockFileFormat").text)",
+
+	"policyFileReadTimeoutMsec" : 60000,
+
+	"connection" : {
+		"emulator" : {
+			"host" : "@((community \ "connection" \ "emulator" \ "host").text)",
+			"port" : @((community \ "connection" \ "emulator" \ "port").text)
+		},
+		"dcdc_controller" : {
+			"host" : "@((community \ "connection" \ "dcdc_controller" \ "host").text)",
+			"port" : @if((cop \ "connection" \ "dcdc_controller" \ "port").text.nonEmpty) {@((cop \ "connection" \ "dcdc_controller" \ "port").text)} else {@((community \ "connection" \ "dcdc_controller" \ "port").text)}
+		},
+		"emu_driver" : {
+			"host" : "@((community \ "connection" \ "emu_driver" \ "host").text)",
+			"port" : @((community \ "connection" \ "emu_driver" \ "port").text)
+		}
+	},
+@if(encryptor != null) {
+	"controlCenter.encrypted" : {
+		"enabled" : @((cop \ "controlCenter" \ "enabled").text),
+		"account" : "@encryptor.format((cop \ "controlCenter" \ "account").text)",
+		"password" : "@encryptor.format((cop \ "controlCenter" \ "password").text)"
+	},
+} else {
+	"controlCenter" : {
+		"enabled" : @((cop \ "controlCenter" \ "enabled").text),
+		"account" : "@((cop \ "controlCenter" \ "account").text)",
+		"password" : "@((cop \ "controlCenter" \ "password").text)"
+	},
+}
+	"watchdog" : {
+		"enabled" : @((cop \ "watchdog" \ "enabled").text),
+		"periodMsec" : @((community \ "connection" \ "watchdog" \ "periodMsec").text),
+		"host" : "@((community \ "connection" \ "watchdog" \ "host").text)",
+		"port" : @((community \ "connection" \ "watchdog" \ "port").text),
+		"uri" : "@((community \ "connection" \ "watchdog" \ "uri").text)",
+		"requestTimeoutMsec" : @((community \ "connection" \ "watchdog" \ "requestTimeoutMsec").text)
+	},
+
+	"batteryCapacityManagement" : {
+		"enabled" : @((cop \ "batteryCapacityManagement" \ "enabled").text)
+	},
+
+	"#" : "end"
+}

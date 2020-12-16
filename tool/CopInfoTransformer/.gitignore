@@ -1,0 +1,12 @@
+target
+bin
+build
+.classpath
+.project
+.settings
+
+main-*.*
+*.main-*.*
+ccc-*.*
+log-*.*
+web-*.*

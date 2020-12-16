@@ -1,0 +1,41 @@
+@import scala.xml.Node
+
+@(community: Node, cop: Node)
+
+{
+	"#" : "start vertx or fat jar with option '-conf path/to/config_file.json'",
+
+	"programId" : "apis-log",
+
+	"communityId" : "@((community \ "communityId").text)",
+	"clusterId" : "@((community \ "cluster" \ "clusterId").text)",
+
+	"logReceiver" : {
+		"ipv6" : @((community \ "logging" \ "multicast" \ "ipv6").text),
+		"multicastGroupAddress" : "@((community \ "logging" \ "multicast" \ "groupAddress").text)",
+		"port" : @((community \ "logging" \ "multicast" \ "port").text),
+		"printToStdout" : @((community \ "logging" \ "printToStdout").text)
+	},
+
+	"mongoDbWriter" : {
+		"enabled" : @((community \ "logging" \ "mongoDb" \ "enabled").text),
+		"level" : "@((community \ "logging" \ "mongoDb" \ "level").text)",
+		"host" : "@((community \ "logging" \ "mongoDb" \ "host").text)",
+		"port" : @((community \ "logging" \ "mongoDb" \ "port").text),
+		"ssl" : @((community \ "logging" \ "mongoDb" \ "ssl").text),
+		"sslTrustAll" : @((community \ "logging" \ "mongoDb" \ "sslTrustAll").text),
+		"database" : "@((community \ "logging" \ "mongoDb" \ "database").text)",
+		"collection" : "@((community \ "logging" \ "mongoDb" \ "collection").text)"
+	},
+
+	"watchdog" : {
+		"enabled" : @((cop \ "watchdog" \ "apis-log" \ "enabled").text),
+		"periodMsec" : @((community \ "connection" \ "watchdog" \ "periodMsec").text),
+		"host" : "@((community \ "connection" \ "watchdog" \ "host").text)",
+		"port" : @((community \ "connection" \ "watchdog" \ "port").text),
+		"uri" : "@((community \ "connection" \ "watchdog" \ "uri").text)",
+		"requestTimeoutMsec" : @((community \ "connection" \ "watchdog" \ "requestTimeoutMsec").text)
+	},
+
+	"#" : "end"
+}

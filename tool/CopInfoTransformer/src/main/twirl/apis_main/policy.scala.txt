@@ -1,0 +1,138 @@
+@import scala.xml.Node
+
+@(community: Node)
+
+{
+	"#" : "place this file at the path defined by 'policyFile' in config file",
+
+	"refreshingPeriodMsec" : @((community \ "policy" \ "refreshingPeriodMsec").text),
+
+	"operationMode" : "@((community \ "policy" \ "operationMode").text)",
+
+	"memberUnitIds" : [@((community \ "policy" \ "memberUnitIds").text)],
+
+	"largeCapacityUnitIds" : [@((community \ "policy" \ "largeCapacityUnitIds").text)],
+
+	"operationGridVoltageV" : @((community \ "policy" \ "operationGridVoltageV").text),
+	"operationGridVoltageVRange" : {
+		"min" : @((community \ "policy" \ "operationGridVoltageVRange" \ "min").text),
+		"max" : @((community \ "policy" \ "operationGridVoltageVRange" \ "max").text)
+	},
+	"gridVoltageSeparationV" : @((community \ "policy" \ "gridVoltageSeparationV").text),
+	"gridVoltageAllowanceV" : @((community \ "policy" \ "gridVoltageAllowanceV").text),
+	"gridVoltageDropAllowanceV" : @((community \ "policy" \ "gridVoltageDropAllowanceV").text),
+	"gridCurrentStepA" : @((community \ "policy" \ "gridCurrentStepA").text),
+	"gridUvloMaskV" : @((community \ "policy" \ "gridUvloMaskV").text),
+
+	"safety" : {
+		"sumOfDealingUnitGridCurrentAllowancePerUnitA" : @((community \ "policy" \ "safety" \ "sumOfDealingUnitGridCurrentAllowancePerUnitA").text),
+		"sumOfDealGridCurrentMaxA" : @((community \ "policy" \ "safety" \ "sumOfDealGridCurrentMaxA").text),
+		"gridTopologyBasedEvaluation" : {
+			"enabled" : @((community \ "policy" \ "safety" \ "gridTopologyBasedEvaluation" \ "enabled").text),
+			"branchIds" : [@((community \ "policy" \ "safety" \ "gridTopologyBasedEvaluation" \ "branchIds").text)],
+			"branchAssociation" : {
+			@for(b <- (community \ "policy" \ "safety" \ "gridTopologyBasedEvaluation" \ "branchAssociation" \ "branch")) {
+				"@((b \ "branchId").text)" : {
+					"forwardUnitIds" : [@((b \ "forwardUnitIds").text)],
+					"backwardUnitIds" : [@((b \ "backwardUnitIds").text)]
+				},
+			}
+				"" : ""
+			},
+			"branchCurrentCapacityA" : {
+			@for(b <- (community \ "policy" \ "safety" \ "gridTopologyBasedEvaluation" \ "branchCurrentCapacityA" \ "branch")) {
+				"@((b \ "branchId").text)" : @((b \ "value").text),
+			}
+				"" : ""
+			}
+		}
+	},
+
+	"heloPeriodMsec" : @((community \ "policy" \ "heloPeriodMsec").text),
+
+	"controller" : {
+		"dcdc" : {
+			"checkpoint" : {
+				"retryLimit" : @((community \ "policy" \ "controller" \ "dcdc" \ "checkpoint" \ "retryLimit").text),
+				"retryWaitMsec" : @((community \ "policy" \ "controller" \ "dcdc" \ "checkpoint" \ "retryWaitMsec").text)
+			},
+			"voltageReference" : {
+				"rampUp" : {
+					"first" : {
+						"timeoutMsec" : @((community \ "policy" \ "controller" \ "dcdc" \ "voltageReference" \ "rampUp" \ "first" \ "timeoutMsec").text)
+					}
+				},
+				"authorization" : {
+					"numberOfTrials" : @((community \ "policy" \ "controller" \ "dcdc" \ "voltageReference" \ "authorization" \ "numberOfTrials").text)
+				}
+			}
+		},
+		"scramVoltageReferenceDelayMsec" : @((community \ "policy" \ "controller" \ "scramVoltageReferenceDelayMsec").text),
+		"stopMeTimeoutMsec" : @((community \ "policy" \ "controller" \ "stopMeTimeoutMsec").text),
+		"stopMeCheckPeriodMsec" : @((community \ "policy" \ "controller" \ "stopMeCheckPeriodMsec").text),
+		"dataAcquisitionPeriodMsec" : @((community \ "policy" \ "controller" \ "dataAcquisitionPeriodMsec").text),
+		"requestTimeoutMsec" : @((community \ "policy" \ "controller" \ "requestTimeoutMsec").text),
+		"retryLimit" : @((community \ "policy" \ "controller" \ "retryLimit").text)
+	},
+
+	"user" : {
+		"errorHandlingPeriodMsec" : @((community \ "policy" \ "user" \ "errorHandlingPeriodMsec").text),
+		"errorSustainingMsec" : @((community \ "policy" \ "user" \ "errorSustainingMsec").text),
+		"houseKeepingPeriodMsec" : @((community \ "policy" \ "user" \ "houseKeepingPeriodMsec").text)
+	},
+
+	"mediator" : {
+		"deal" : {
+			"gridCurrentA" : @((community \ "policy" \ "mediator" \ "deal" \ "gridCurrentA").text),
+			"amountMinWh" : @((community \ "policy" \ "mediator" \ "deal" \ "amountMinWh").text),
+			"amountMaxWh" : @((community \ "policy" \ "mediator" \ "deal" \ "amountMaxWh").text),
+			"amountUnitWh" : @((community \ "policy" \ "mediator" \ "deal" \ "amountUnitWh").text)
+		},
+		"negotiationTimeoutMsec" : @((community \ "policy" \ "mediator" \ "negotiationTimeoutMsec").text),
+		"dealLoggingPeriodMsec" : @((community \ "policy" \ "mediator" \ "dealLoggingPeriodMsec").text)
+	},
+
+	"gridMaster" : {
+		"voltageReferenceSide" : "@((community \ "policy" \ "gridMaster" \ "voltageReferenceSide").text)",
+		"voltageReferenceTakeOverDvg" : "@((community \ "policy" \ "gridMaster" \ "voltageReferenceTakeOverDvg").text)",
+		"masterDealSelection" : {
+			"strategy" : "@((community \ "policy" \ "gridMaster" \ "masterDealSelection" \ "strategy").text)"
+		},
+		"gridMasterSelection" : {
+			"strategy" : "@((community \ "policy" \ "gridMaster" \ "gridMasterSelection" \ "strategy").text)",
+			"fixedUnitId" : "@((community \ "policy" \ "gridMaster" \ "gridMasterSelection" \ "fixedUnitId").text)"
+		},
+		"gridMasterEnsuring" : {
+			"interlockInconsistency" : {
+				"retryWaitMsec" : @((community \ "policy" \ "gridMaster" \ "gridMasterEnsuring" \ "interlockInconsistency" \ "retryWaitMsec").text)
+			}
+		},
+		"gridMasterWatching" : {
+			"absence" : {
+				"ensureWaitMsec" : @((community \ "policy" \ "gridMaster" \ "gridMasterWatching" \ "absence" \ "ensureWaitMsec").text)
+			}
+		},
+		"deal" : {
+			"forceStopCondition" : {
+				"dischargeUnitLowerLimitRsoc" : @((community \ "policy" \ "gridMaster" \ "deal" \ "forceStopCondition" \ "dischargeUnitLowerLimitRsoc").text),
+				"chargeUnitUpperLimitRsoc" : @((community \ "policy" \ "gridMaster" \ "deal" \ "forceStopCondition" \ "chargeUnitUpperLimitRsoc").text)
+			},
+			"referenceSide" : "@((community \ "policy" \ "gridMaster" \ "deal" \ "referenceSide").text)",
+			"resetLimit" : @((community \ "policy" \ "gridMaster" \ "deal" \ "resetLimit").text)
+		},
+		"currentCompensation" : {
+			"limitOfTrials" : @((community \ "policy" \ "gridMaster" \ "currentCompensation" \ "limitOfTrials").text),
+			"driftAllowanceA" : @((community \ "policy" \ "gridMaster" \ "currentCompensation" \ "driftAllowanceA").text)
+		},
+		"gridVoltageOptimization" : {
+			"enabled" : @((community \ "policy" \ "gridMaster" \ "gridVoltageOptimization" \ "enabled").text)
+		},
+		"heloPeriodMsec" : @((community \ "policy" \ "gridMaster" \ "heloPeriodMsec").text),
+		"dataCollectionPeriodMsec" : @((community \ "policy" \ "gridMaster" \ "dataCollectionPeriodMsec").text),
+		"dataCollectionTimeoutMsec" : @((community \ "policy" \ "gridMaster" \ "dataCollectionTimeoutMsec").text),
+		"mainLoopPeriodMsec" : @((community \ "policy" \ "gridMaster" \ "mainLoopPeriodMsec").text),
+		"errorSustainingMsec" : @((community \ "policy" \ "gridMaster" \ "errorSustainingMsec").text)
+	},
+
+	"#" : "end"
+}

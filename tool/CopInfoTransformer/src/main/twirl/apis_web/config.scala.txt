@@ -1,0 +1,39 @@
+@import scala.xml.Node
+
+@(community: Node, cop: Node)
+
+{
+	"#" : "start vertx or fat jar with option '-conf path/to/config_file.json'",
+
+	"programId" : "apis-web",
+
+	"communityId" : "@((community \ "communityId").text)",
+	"clusterId" : "@((community \ "cluster" \ "clusterId").text)",
+
+	"security" : {
+		"enabled" : @((community \ "cluster" \ "security" \ "enabled").text),
+		"pemKeyFile" : "./key.pem",
+		"pemCertFile" : "./cert.pem"
+	},
+
+	"budoEmulator" : {
+		"port" : @((community \ "connection" \ "budoEmulator" \ "port").text)
+	},
+	"emulatorEmulator" : {
+		"port" : @((community \ "connection" \ "emulatorEmulator" \ "port").text)
+	},
+	"apiServer" : {
+		"port" : @((community \ "connection" \ "apiServer" \ "port").text)
+	},
+
+	"watchdog" : {
+		"enabled" : @((cop \ "watchdog" \ "apis-web" \ "enabled").text),
+		"periodMsec" : @((community \ "connection" \ "watchdog" \ "periodMsec").text),
+		"host" : "@((community \ "connection" \ "watchdog" \ "host").text)",
+		"port" : @((community \ "connection" \ "watchdog" \ "port").text),
+		"uri" : "@((community \ "connection" \ "watchdog" \ "uri").text)",
+		"requestTimeoutMsec" : @((community \ "connection" \ "watchdog" \ "requestTimeoutMsec").text)
+	},
+
+	"#" : "end"
+}
