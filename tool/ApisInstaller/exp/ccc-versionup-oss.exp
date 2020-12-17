@@ -1,0 +1,106 @@
+
+#
+# Execute version up apis-ccc at COP
+#
+
+if [ $# -ne 6 ]; then
+  echo "Usage: bash ccc-versionup.exp sshPassphrase interface hostName account version workDir"
+  exit 1
+fi
+
+sshPassphrase=$1
+interface=$2
+hostName=$3
+account=$4
+version=$5
+workDir=$6
+
+echo "`date`"
+echo "START : ccc-versionup.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${workDir}"
+
+if echo "${hostName}" | grep -q ':' ; then
+  SSH_HOST=${hostName}%${interface}
+  SCP_HOST=\\[${hostName}%${interface}\\]
+else
+  SSH_HOST=${hostName}
+  SCP_HOST=${hostName}
+fi
+
+prompt="${account}@.*$"
+
+expect -c "
+set timeout -1
+
+spawn ssh -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${account}@${SSH_HOST}
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  -regexp \"${prompt}\" {
+    send \"rm -f apis-ccc\n\"
+    set timeout 30
+    expect {
+      -regexp \"${prompt}\" {
+        send \"rm -rf apis-ccc-*\n\"
+        set timeout 30
+      }
+    }
+    expect {
+      -regexp \"${prompt}\" {
+        send \"logout\n\"
+        set timeout 30
+      }
+    }
+  }
+}
+
+spawn scp -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${workDir}/apis-ccc-${version}.tar.gz ${account}@${SCP_HOST}:
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  expect eof
+}
+
+spawn ssh -o ConnectTimeout=15 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${account}@${SSH_HOST}
+expect {
+  -regexp \"Enter passphrase for key .*:\" {
+    send -- \"${sshPassphrase}\n\"
+    set timeout 30
+    exp_continue
+  }
+  -regexp \"${prompt}\" {
+    send \"tar zxvf apis-ccc-${version}.tar.gz\n\"
+    set timeout 30
+    expect {
+      -regexp \"${prompt}\" {
+        send \"rm -f apis-ccc-${version}.tar.gz\n\"
+        set timeout 30
+      }
+    }
+    expect {
+      -regexp \"${prompt}\" {
+        send \"ln -s apis-ccc-${version} apis-ccc\n\"
+        set timeout 30
+      }
+    }
+    expect {
+      -regexp \"${prompt}\" {
+        send \"logout\n\"
+        set timeout 30
+      }
+    }
+  }
+}
+"
+
+echo ""
+echo "END   : ccc-versionup.exp ${sshPassphrase} ${interface} ${hostName} ${account} ${version} ${workDir}"
+echo "`date`"
+echo ""
+
+exit 0

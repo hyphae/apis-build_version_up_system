@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<community>
+	<communityId>oss_community</communityId>	<!-- apis-main の config.json の communityId -->
+	<cluster>
+		<clusterId>oss_cluster</clusterId>	<!-- apis-main の config.json の clusterId -->
+		<security>
+			<enabled>true</enabled>
+			<cert>
+				<countryName>JP</countryName>
+				<stateOrProvinceName></stateOrProvinceName>
+				<localityName></localityName>
+				<organizationName></organizationName>
+				<organizationalUnitName></organizationalUnitName>
+				<commonName></commonName>
+				<emailAddress></emailAddress>
+			</cert>
+		</security>
+		<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
+		<!-- 仕方がないのでアタマに hazelcast 要素を入れることにする... -->
+		<hazelcast>
+			<group>
+				<name>oss_cluster</name>	<!-- cluster.xml の /hazelcast/group/name -->
+				<password>oss_cluster-pass</password>	<!-- cluster.xml の /hazelcast/group/password -->
+			</group>
+			<network>
+				<join>
+					<multicast>
+						<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/join/multicast/@enabled -->
+						<loopbackModeEnabled>false</loopbackModeEnabled>	<!-- cluster.xml の /hazelcast/network/join/multicast/@loopbackModeEnabled -->
+						<multicast-group>224.2.2.3</multicast-group>	<!-- cluster.xml の /hazelcast/network/join/multicast/multicast-group -->
+						<multicast-port>54327</multicast-port>	<!-- cluster.xml の /hazelcast/network/join/multicast/multicast-port -->
+					</multicast>
+					<tcp-ip>
+						<enabled>false</enabled>	<!-- cluster.xml の /hazelcast/network/join/tcp-ip/@enabled -->
+						<member>127.0.0.1</member>	<!-- cluster.xml の /hazelcast/network/join/tcp-ip/member -->
+					</tcp-ip>
+				</join>
+			</network>
+		</hazelcast>
+	</cluster>
+	<systemType>dcdc_emulator</systemType>	<!-- apis-main の config.json の systemType -->
+	<stateFileFormat>{tmpdir}/apis/state/%s</stateFileFormat>	<!-- apis-main の config.json の stateFileFormat -->
+	<dealLogDirFormat>'{tmpdir}/apis/dealLog/'uuuu'/'MM'/'dd</dealLogDirFormat>	<!-- apis-main の config.json の dealLogDirFormat -->
+	<fileSystemExclusiveLockFileFormat>{tmpdir}/.apis.%s.lock</fileSystemExclusiveLockFileFormat>	<!-- apis-main の config.json の fileSystemExclusiveLockFileFormat -->
+	<connection>
+		<emulator>
+			<host>localhost</host>	<!-- apis-main の config.json の connection.emulator.host -->
+			<port>4390</port>	<!-- apis-main の config.json の connection.emulator.port -->
+		</emulator>
+		<dcdc_controller>
+			<host>localhost</host>	<!-- apis-main の config.json の connection.dcdc_controller.host -->
+			<port>4380</port>	<!-- apis-main の config.json の connection.dcdc_controller.port -->
+		</dcdc_controller>
+		<emu_driver>
+			<host>localhost</host>	<!-- apis-main の config.json の connection.emu_driver.host -->
+			<port>8080</port>	<!-- apis-main の config.json の connection.emu_driver.port -->
+		</emu_driver>
+		<dealReporting>
+			<enabled>true</enabled>	<!-- apis-ccc の config.json の dealReporting.enabled -->
+			<periodMsec>30000</periodMsec>	<!-- apis-ccc の config.json の dealReporting.periodMsec -->
+			<type>mongo_db</type>	<!-- apis-ccc の config.json の dealReporting.type -->
+			<host>localhost</host>	<!-- apis-ccc の config.json の dealReporting.host -->
+			<port>27018</port>	<!-- apis-ccc の config.json の dealReporting.port -->
+			<ssl>false</ssl>	<!-- apis-ccc の config.json の dealReporting.ssl -->
+			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の dealReporting.sslTrustAll -->
+			<database>apis_demo</database>	<!-- apis-ccc の config.json の dealReporting.database -->
+			<collection>deal</collection>	<!-- apis-ccc の config.json の dealReporting.collection -->
+			<uri></uri>	<!-- apis-ccc の config.json の dealReporting.uri -->
+			<requestTimeoutMsec>5000</requestTimeoutMsec>	<!-- apis-ccc の config.json の dealReporting.requestTimeoutMsec -->
+		</dealReporting>
+		<unitDataReporting>
+			<enabled>true</enabled>	<!-- apis-ccc の config.json の unitDataReporting.enabled -->
+			<periodMsec>30000</periodMsec>	<!-- apis-ccc の config.json の unitDataReporting.periodMsec -->
+			<type>mongo_db</type>	<!-- apis-ccc の config.json の unitDataReporting.type -->
+			<host>localhost</host>	<!-- apis-ccc の config.json の unitDataReporting.host -->
+			<port>27018</port>	<!-- apis-ccc の config.json の unitDataReporting.port -->
+			<ssl>false</ssl>	<!-- apis-ccc の config.json の unitDataReporting.ssl -->
+			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の unitDataReporting.sslTrustAll -->
+			<database>apis_demo</database>	<!-- apis-ccc の config.json の unitDataReporting.database -->
+			<collection>unitData</collection>	<!-- apis-ccc の config.json の unitDataReporting.collection -->
+			<uri></uri>	<!-- apis-ccc の config.json の unitDataReporting.uri -->
+			<requestTimeoutMsec>5000</requestTimeoutMsec>	<!-- apis-ccc の config.json の unitDataReporting.requestTimeoutMsec -->
+		</unitDataReporting>
+		<scenarioAcquisition>
+			<enabled>true</enabled>	<!-- apis-ccc の config.json の scenarioAcquisition.enabled -->
+			<host>localhost</host>	<!-- apis-ccc の config.json の scenarioAcquisition.host -->
+			<port>8000</port>	<!-- apis-ccc の config.json の scenarioAcquisition.port -->
+			<ssl>false</ssl>	<!-- apis-ccc の config.json の scenarioAcquisition.ssl -->
+			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の scenarioAcquisition.sslTrustAll -->
+			<uri>/api/misc/scenario/currentData</uri>	<!-- apis-ccc の config.json の scenarioAcquisition.uri -->
+			<requestTimeoutMsec>5000</requestTimeoutMsec>	<!-- apis-ccc の config.json の scenarioAcquisition.requestTimeoutMsec -->
+		</scenarioAcquisition>
+		<policyAcquisition>
+			<enabled>false</enabled>	<!-- apis-ccc の config.json の policyAcquisition.enabled -->
+			<host>localhost</host>	<!-- apis-ccc の config.json の policyAcquisition.host -->
+			<port>8000</port>	<!-- apis-ccc の config.json の policyAcquisition.port -->
+			<ssl>false</ssl>	<!-- apis-ccc の config.json の policyAcquisition.ssl -->
+			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の policyAcquisition.sslTrustAll -->
+			<uri>/api/misc/policy/currentData</uri>	<!-- apis-ccc の config.json の policyAcquisition.uri -->
+			<requestTimeoutMsec>5000</requestTimeoutMsec>	<!-- apis-ccc の config.json の policyAcquisition.requestTimeoutMsec -->
+		</policyAcquisition>
+		<budoEmulator>
+			<port>43830</port>	<!-- apis-web の config.json の budoEmulator.port -->
+		</budoEmulator>
+		<emulatorEmulator>
+			<port>43900</port>	<!-- apis-web の config.json の emulatorEmulator.port -->
+		</emulatorEmulator>
+		<apiServer>
+			<port>9999</port>	<!-- apis-web の config.json の apiServer.port -->
+		</apiServer>
+		<watchdog>
+			<periodMsec>5000</periodMsec>	<!-- apis-* の config.json の watchdog.periodMsec -->
+			<host>localhost</host>	<!-- apis-* の config.json の watchdog.host -->
+			<port>12345</port>	<!-- apis-* の config.json の watchdog.port -->
+			<uri>/restart</uri>	<!-- apis-* の config.json の watchdog.uri -->
+			<requestTimeoutMsec>5000</requestTimeoutMsec>	<!-- apis-* の config.json の watchdog.requestTimeoutMsec -->
+		</watchdog>
+	</connection>
+	<start>
+		<apis-main>
+			<jvmOption>-Djava.net.preferIPv4Stack=true</jvmOption>	<!-- apis-main の start.sh -->
+			<vertxOption></vertxOption>	<!-- apis-main の start.sh -->
+		</apis-main>
+		<apis-ccc>
+			<jvmOption>-Djava.net.preferIPv4Stack=true</jvmOption>	<!-- apis-ccc の start.sh -->
+			<vertxOption></vertxOption>	<!-- apis-ccc の start.sh -->
+		</apis-ccc>
+		<apis-log>
+			<jvmOption>-Djava.net.preferIPv4Stack=true</jvmOption>	<!-- apis-log の start.sh -->
+			<vertxOption></vertxOption>	<!-- apis-log の start.sh -->
+		</apis-log>
+		<apis-web>
+			<jvmOption></jvmOption>	<!-- apis-web の start.sh -->
+			<vertxOption></vertxOption>	<!-- apis-web の start.sh -->
+		</apis-web>
+	</start>
+	<logging>
+		<apis-main>
+			<console>
+				<level>ALL</level>	<!-- apis-main の logging.properties の java.util.logging.ConsoleHandler.level -->
+			</console>
+			<file>
+				<level>INFO</level>	<!-- apis-main の logging.properties の java.util.logging.FileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-main の logging.properties の java.util.logging.FileHandler.limit -->
+				<count>10</count>	<!-- apis-main の logging.properties の java.util.logging.FileHandler.count -->
+			</file>
+			<anotherFile>
+				<level>WARNING</level>	<!-- apis-main の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-main の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.limit -->
+				<count>10</count>	<!-- apis-main の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.count -->
+			</anotherFile>
+			<multicast>
+				<level>ALL</level>	<!-- apis-main の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.level -->
+			</multicast>
+		</apis-main>
+		<apis-ccc>
+			<console>
+				<level>ALL</level>	<!-- apis-ccc の logging.properties の java.util.logging.ConsoleHandler.level -->
+			</console>
+			<file>
+				<level>INFO</level>	<!-- apis-ccc の logging.properties の java.util.logging.FileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-ccc の logging.properties の java.util.logging.FileHandler.limit -->
+				<count>10</count>	<!-- apis-ccc の logging.properties の java.util.logging.FileHandler.count -->
+			</file>
+			<anotherFile>
+				<level>WARNING</level>	<!-- apis-ccc の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-ccc の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.limit -->
+				<count>10</count>	<!-- apis-ccc の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.count -->
+			</anotherFile>
+			<multicast>
+				<level>INFO</level>	<!-- apis-ccc の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.level -->
+			</multicast>
+		</apis-ccc>
+		<apis-log>
+			<console>
+				<level>ALL</level>	<!-- apis-log の logging.properties の java.util.logging.ConsoleHandler.level -->
+			</console>
+			<file>
+				<level>INFO</level>	<!-- apis-log の logging.properties の java.util.logging.FileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-log の logging.properties の java.util.logging.FileHandler.limit -->
+				<count>10</count>	<!-- apis-log の logging.properties の java.util.logging.FileHandler.count -->
+			</file>
+			<anotherFile>
+				<level>WARNING</level>	<!-- apis-log の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-log の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.limit -->
+				<count>10</count>	<!-- apis-log の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.count -->
+			</anotherFile>
+			<multicast>
+				<level>INFO</level>	<!-- apis-log の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.level -->
+			</multicast>
+		</apis-log>
+		<apis-web>
+			<console>
+				<level>ALL</level>	<!-- apis-web の logging.properties の java.util.logging.ConsoleHandler.level -->
+			</console>
+			<file>
+				<level>INFO</level>	<!-- apis-web の logging.properties の java.util.logging.FileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-web の logging.properties の java.util.logging.FileHandler.limit -->
+				<count>10</count>	<!-- apis-web の logging.properties の java.util.logging.FileHandler.count -->
+			</file>
+			<anotherFile>
+				<level>WARNING</level>	<!-- apis-web の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.level -->
+				<limit>5242880</limit>	<!-- apis-web の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.limit -->
+				<count>10</count>	<!-- apis-web の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.AnotherFileHandler.count -->
+			</anotherFile>
+			<multicast>
+				<level>INFO</level>	<!-- apis-web の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.level -->
+			</multicast>
+		</apis-web>
+		<multicast>
+			<ipv6>false</ipv6>	<!-- apis-log の config.json の logReceiver.ipv6 -->
+			<groupAddress>224.2.2.4</groupAddress>	<!-- apis-log の config.json の logReceiver.multicastGroupAddress --> <!-- apis-{main,ccc,log,web} の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.groupAddress -->
+			<port>8888</port>	<!-- apis-log の config.json の logReceiver.port --> <!-- apis-{main,ccc,log,web} の logging.properties の jp.co.sony.csl.dcoes.apis.common.util.MulticastHandler.port -->
+		</multicast>
+		<mongoDb>
+			<enabled>true</enabled>	<!-- apis-log の config.json の mongoDbWriter.enabled -->
+			<level>INFO</level>	<!-- apis-log の config.json の mongoDbWriter.level -->
+			<host>localhost</host>	<!-- apis-log の config.json の mongoDbWriter.host -->
+			<port>27018</port>	<!-- apis-log の config.json の mongoDbWriter.port -->
+			<ssl>false</ssl>	<!-- apis-log の config.json の mongoDbWriter.ssl -->
+			<sslTrustAll>false</sslTrustAll>	<!-- apis-log の config.json の mongoDbWriter.sslTrustAll -->
+			<database>apis_demo</database>	<!-- apis-log の config.json の mongoDbWriter.database -->
+			<collection>apisLog</collection>	<!-- apis-log の config.json の mongoDbWriter.collection -->
+		</mongoDb>
+		<printToStdout>true</printToStdout>	<!-- apis-log の config.json の printToStdout -->
+	</logging>
+	<policy>
+		<refreshingPeriodMsec>5000</refreshingPeriodMsec>	<!-- policy.json の refreshingPeriodMsec -->
+		<operationMode>stop</operationMode>	<!-- policy.json の operationMode ( autonomous | heteronomous | stop | manual ) -->
+		<memberUnitIds>"E001"</memberUnitIds>	<!-- policy.json の memberUnitIds -->
+		<largeCapacityUnitIds>"E001"</largeCapacityUnitIds>	<!-- policy.json の largeCapacityUnitIds -->
+		<operationGridVoltageV>350</operationGridVoltageV>	<!-- policy.json の operationGridVoltageV -->
+		<operationGridVoltageVRange>
+			<min>300</min>	<!-- policy.json の operationGridVoltageVRange.min -->
+			<max>380</max>	<!-- policy.json の operationGridVoltageVRange.max -->
+		</operationGridVoltageVRange>
+		<gridVoltageSeparationV>10</gridVoltageSeparationV>	<!-- policy.json の gridVoltageSeparationV -->
+		<gridVoltageAllowanceV>4</gridVoltageAllowanceV>	<!-- policy.json の gridVoltageAllowanceV -->
+		<gridVoltageDropAllowanceV>20</gridVoltageDropAllowanceV>	<!-- policy.json の gridVoltageDropAllowanceV -->
+		<gridCurrentStepA>1</gridCurrentStepA>	<!-- policy.json の gridCurrentStepA -->
+		<gridUvloMaskV>10</gridUvloMaskV>	<!-- policy.json の gridUvloMaskV -->
+		<safety>
+			<sumOfDealingUnitGridCurrentAllowancePerUnitA>0.125</sumOfDealingUnitGridCurrentAllowancePerUnitA>	<!-- policy.json の safety.sumOfDealingUnitGridCurrentAllowancePerUnitA -->
+			<sumOfDealGridCurrentMaxA>100</sumOfDealGridCurrentMaxA>	<!-- policy.json の safety.sumOfDealGridCurrentMaxA -->
+			<gridTopologyBasedEvaluation>
+				<enabled>false</enabled>	<!-- policy.json の safety.gridTopologyBasedEvaluation.enabled -->
+				<branchIds></branchIds>	<!-- policy.json の safety.gridTopologyBasedEvaluation.branchIds -->
+				<branchAssociation>
+				</branchAssociation>
+				<branchCurrentCapacityA>
+				</branchCurrentCapacityA>
+			</gridTopologyBasedEvaluation>
+		</safety>
+		<heloPeriodMsec>5000</heloPeriodMsec>	<!-- policy.json の heloPeriodMsec -->
+		<controller>
+			<dcdc>
+				<checkpoint>
+					<retryLimit>3</retryLimit>	<!-- policy.json の controller.dcdc.checkpoint.retryLimit -->
+					<retryWaitMsec>100</retryWaitMsec>	<!-- policy.json の controller.dcdc.checkpoint.retryWaitMsec -->
+				</checkpoint>
+				<voltageReference>
+					<rampUp>
+						<first>
+							<timeoutMsec>180000</timeoutMsec>	<!-- policy.json の controller.dcdc.voltageReference.rampUp.first.timeoutMsec -->
+						</first>
+					</rampUp>
+					<authorization>
+						<numberOfTrials>3</numberOfTrials>	<!-- policy.json の controller.dcdc.voltageReference.authorization.numberOfTrials -->
+					</authorization>
+				</voltageReference>
+			</dcdc>
+			<scramVoltageReferenceDelayMsec>5000</scramVoltageReferenceDelayMsec>	<!-- policy.json の controller.scramVoltageReferenceDelayMsec -->
+			<stopMeTimeoutMsec>60000</stopMeTimeoutMsec>	<!-- policy.json の controller.stopMeTimeoutMsec -->
+			<stopMeCheckPeriodMsec>1000</stopMeCheckPeriodMsec>	<!-- policy.json の controller.stopMeCheckPeriodMsec -->
+			<dataAcquisitionPeriodMsec>5000</dataAcquisitionPeriodMsec>	<!-- policy.json の controller.dataAcquisitionPeriodMsec -->
+			<requestTimeoutMsec>5000</requestTimeoutMsec>	<!-- policy.json の controller.requestTimeoutMsec -->
+			<retryLimit>3</retryLimit>	<!-- policy.json の controller.retryLimit -->
+		</controller>
+		<user>
+			<errorHandlingPeriodMsec>1000</errorHandlingPeriodMsec>	<!-- policy.json の user.errorHandlingPeriodMsec -->
+			<errorSustainingMsec>30000</errorSustainingMsec>	<!-- policy.json の user.errorSustainingMsec -->
+			<houseKeepingPeriodMsec>5000</houseKeepingPeriodMsec>	<!-- policy.json の user.houseKeepingPeriodMsec -->
+		</user>
+		<mediator>
+			<deal>
+				<gridCurrentA>1</gridCurrentA>	<!-- policy.json の mediator.deal.gridCurrentA -->
+				<amountMinWh>50</amountMinWh>	<!-- policy.json の mediator.deal.amountMinWh -->
+				<amountMaxWh>50</amountMaxWh>	<!-- policy.json の mediator.deal.amountMaxWh -->
+				<amountUnitWh>50</amountUnitWh>	<!-- policy.json の mediator.deal.amountUnitWh -->
+			</deal>
+			<negotiationTimeoutMsec>2000</negotiationTimeoutMsec>	<!-- policy.json の mediator.negotiationTimeoutMsec -->
+			<dealLoggingPeriodMsec>5000</dealLoggingPeriodMsec>	<!-- policy.json の mediator.dealLoggingPeriodMsec -->
+		</mediator>
+		<gridMaster>
+			<voltageReferenceSide>chargeUnit</voltageReferenceSide>	<!-- policy.json の gridMaster.voltageReferenceSide ( chargeUnit | dischargeUnit ) -->
+			<voltageReferenceTakeOverDvg>theoretical</voltageReferenceTakeOverDvg>	<!-- policy.json の gridMaster.voltageReferenceTakeOverDvg ( theoretical | actual ) -->
+			<masterDealSelection>
+				<strategy>newestDeal</strategy>	<!-- policy.json の gridMaster.masterDealSelection.strategy ( notYetImplemented_oldestDeal| newestDeal| notYetImplemented_shortLastingDeal| notYetImplemented_longLastingDeal) -->
+			</masterDealSelection>
+			<gridMasterSelection>
+				<strategy>voltageReferenceUnit</strategy>	<!-- policy.json の gridMaster.gridMasterSelection.strategy ( anywhere | fixed | voltageReferenceUnit ) -->
+				<fixedUnitId>Exxx</fixedUnitId>	<!-- policy.json の gridMaster.gridMasterSelection.fixedUnitId -->
+			</gridMasterSelection>
+			<gridMasterEnsuring>
+				<interlockInconsistency>
+					<retryWaitMsec>2000</retryWaitMsec>	<!-- policy.json の gridMaster.gridMasterEnsuring.interlockInconsistency.retryWaitMsec -->
+				</interlockInconsistency>
+			</gridMasterEnsuring>
+			<gridMasterWatching>
+				<absence>
+					<ensureWaitMsec>5000</ensureWaitMsec>	<!-- policy.json の gridMaster.gridMasterWatching.absence.ensureWaitMsec -->
+				</absence>
+			</gridMasterWatching>
+			<deal>
+				<forceStopCondition>
+					<dischargeUnitLowerLimitRsoc>20</dischargeUnitLowerLimitRsoc>	<!-- policy.json の gridMaster.deal.forceStopCondition.dischargeUnitLowerLimitRsoc -->
+					<chargeUnitUpperLimitRsoc>95</chargeUnitUpperLimitRsoc>	<!-- policy.json の gridMaster.deal.forceStopCondition.chargeUnitUpperLimitRsoc -->
+				</forceStopCondition>
+				<referenceSide>chargeUnit</referenceSide>	<!-- policy.json の gridMaster.deal.referenceSide ( chargeUnit | dischargeUnit ) -->
+				<resetLimit>3</resetLimit>	<!-- policy.json の gridMaster.deal.resetLimit -->
+			</deal>
+			<currentCompensation>
+				<limitOfTrials>3</limitOfTrials>	<!-- policy.json の gridMaster.currentCompensation.limitOfTrials -->
+				<driftAllowanceA>0.03</driftAllowanceA>	<!-- policy.json の gridMaster.currentCompensation.driftAllowanceA -->
+			</currentCompensation>
+			<gridVoltageOptimization>
+				<enabled>true</enabled>	<!-- policy.json の gridMaster.gridVoltageOptimization.enabled -->
+			</gridVoltageOptimization>
+			<heloPeriodMsec>5000</heloPeriodMsec>	<!-- policy.json の gridMaster.heloPeriodMsec -->
+			<dataCollectionPeriodMsec>5000</dataCollectionPeriodMsec>	<!-- policy.json の gridMaster.dataCollectionPeriodMsec -->
+			<dataCollectionTimeoutMsec>2000</dataCollectionTimeoutMsec>	<!-- policy.json の gridMaster.dataCollectionTimeoutMsec -->
+			<mainLoopPeriodMsec>5000</mainLoopPeriodMsec>	<!-- policy.json の gridMaster.mainLoopPeriodMsec -->
+			<errorSustainingMsec>30000</errorSustainingMsec>	<!-- policy.json の gridMaster.errorSustainingMsec -->
+		</gridMaster>
+	</policy>
+	<scenario>
+		<refreshingPeriodMsec>5000</refreshingPeriodMsec>	<!-- scenario.json の refreshingPeriodMsec -->
+		<acceptSelection>
+			<strategy>pointAndAmount</strategy>	<!-- scenario.json の acceptSelection.strategy ( amount | pointAndAmount ) -->
+		</acceptSelection>
+		<!-- 無理なのでベタ書き...となると scenario.json 全体をベタ書きでいんじゃないかという気がしてくる... -->
+		<content><![CDATA[
+	"00:00:00-24:00:00" : {
+		"batteryStatus" : {
+			"4320-"     : "excess",
+			"3600-4320" : "sufficient",
+			"2880-3600" : "scarce",
+			    "-2880" : "short"
+		},
+		"request" : {
+			"excess" : {
+				"discharge" : {
+					"limitWh" : 4320,
+					"pointPerWh" : 10
+				}
+			},
+			"sufficient" : {
+			},
+			"scarce" : {
+			},
+			"short" : {
+				"charge" : {
+					"limitWh" : 2880,
+					"pointPerWh" : 10
+				}
+			}
+		},
+		"accept" : {
+			"excess" : {
+				"discharge" : {
+					"limitWh" : 3600,
+					"pointPerWh" : 10
+				}
+			},
+			"sufficient" : {
+				"discharge" : {
+					"limitWh" : 3600,
+					"pointPerWh" : 10
+				}
+			},
+			"scarce" : {
+				"charge" : {
+					"limitWh" : 3600,
+					"pointPerWh" : 10
+				}
+			},
+			"short" : {
+				"charge" : {
+					"limitWh" : 3600,
+					"pointPerWh" : 10
+				}
+			}
+		}
+	},
+		]]></content>	<!-- scenario.json ( 直で ) -->
+	</scenario>
+	<firstCop>
+		<hostName>localhost</hostName>
+		<account>account</account>
+		<cluster>
+			<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
+			<!-- 仕方がないのでアタマに hazelcast 要素を入れることにする... -->
+			<hazelcast>
+				<network>
+					<interfaces>
+						<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/interfaces/@enabled -->
+						<interface>127.0.0.1</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
+					</interfaces>
+				</network>
+			</hazelcast>
+		</cluster>
+		<start>
+			<apis-web>
+				<jvmOption></jvmOption>	<!-- apis-web の start.sh -->
+				<vertxOption>-cluster-host 127.0.0.1</vertxOption>	<!-- apis-web の start.sh -->
+			</apis-web>
+			<apis-ccc>
+				<jvmOption></jvmOption>	<!-- apis-ccc の start.sh -->
+				<vertxOption>-cluster-host 127.0.0.1</vertxOption>	<!-- apis-ccc の start.sh -->
+			</apis-ccc>
+			<apis-log>
+				<jvmOption></jvmOption>	<!-- apis-log の start.sh -->
+				<vertxOption></vertxOption>	<!-- apis-log の start.sh -->
+			</apis-log>
+		</start>
+		<watchdog>
+			<apis-web>
+				<enabled>false</enabled>	<!-- apis-web の config.json の watchdog.enabled -->
+			</apis-web>
+			<apis-ccc>
+				<enabled>false</enabled>	<!-- apis-ccc の config.json の watchdog.enabled -->
+			</apis-ccc>
+			<apis-log>
+				<enabled>false</enabled>	<!-- apis-log の config.json の watchdog.enabled -->
+			</apis-log>
+		</watchdog>
+	</firstCop>
+	<copList>
+		<cop>
+			<hostName>127.0.0.1</hostName>
+			<account>account</account>
+			<cluster>
+				<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
+				<!-- 仕方がないのでアタマに hazelcast 要素を入れることにする... -->
+				<hazelcast>
+					<network>
+						<interfaces>
+							<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/interfaces/@enabled -->
+							<interface>127.0.0.1</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
+						</interfaces>
+					</network>
+				</hazelcast>
+			</cluster>
+			<unitId>E001</unitId>	<!-- apis-main の config.json の unitId -->
+			<unitName>E001</unitName>	<!-- apis-main の config.json の unitName -->
+			<serialNumber>1</serialNumber>	<!-- apis-main の config.json の serialNumber -->
+			<hwConfig>
+				<refreshingPeriodMsec>5000</refreshingPeriodMsec>	<!-- apis-main の hwConfig.json の refreshingPeriodMsec -->
+				<batteryNominalCapacityWh>4800</batteryNominalCapacityWh>	<!-- apis-main の hwConfig.json の batteryNominalCapacityWh -->
+				<gridCurrentCapacityA>2.3</gridCurrentCapacityA>	<!-- apis-main の hwConfig.json の gridCurrentCapacityA -->
+				<gridCurrentAllowanceA>0.125</gridCurrentAllowanceA>	<!-- apis-main の hwConfig.json の gridCurrentAllowanceA -->
+				<droopRatio>0.039</droopRatio>	<!-- apis-main の hwConfig.json の droopRatio -->
+				<efficientBatteryGridVoltageRatio>6.5</efficientBatteryGridVoltageRatio>	<!-- apis-main の hwConfig.json の efficientBatteryGridVoltageRatio -->
+				<safety>
+					<range>
+						<dcdc>
+							<meter>
+								<tmp>
+									<min>0</min>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.tmp.min -->
+									<max>45</max>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.tmp.max -->
+								</tmp>
+								<vg>
+									<min>-4</min>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.vg.min -->
+									<max>380</max>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.vg.max -->
+								</vg>
+								<vb>
+									<min>32</min>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.vb.min -->
+									<max>58.4</max>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.vb.max -->
+								</vb>
+								<ig>
+									<min>-2.35</min>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.ig.min -->
+									<max>2.35</max>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.ig.max -->
+								</ig>
+								<ib>
+									<min>-20</min>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.ib.min -->
+									<max>20</max>	<!-- apis-main の hwConfig.json の safety.range.dcdc.meter.ib.max -->
+								</ib>
+							</meter>
+						</dcdc>
+					</range>
+				</safety>
+			</hwConfig>
+			<controlCenter>
+				<enabled>true</enabled>	<!-- apis-main の config.json の controlCenter.enabled -->
+				<account>e001</account>	<!-- apis-main の config.json の controlCenter.account -->
+				<password>e001</password>	<!-- apis-main の config.json の controlCenter.password -->
+			</controlCenter>
+			<stateFileFormat>{tmpdir}/apis/state-E001/%s</stateFileFormat>	<!-- apis-main の config.json の stateFileFormat -->
+			<dealLogDirFormat>'{tmpdir}/apis/dealLog-E001/'uuuu'/'MM'/'dd</dealLogDirFormat>	<!-- apis-main の config.json の dealLogDirFormat -->
+			<start>
+				<apis-main>
+					<jvmOption></jvmOption>	<!-- apis-main の start.sh -->
+					<vertxOption>-cluster-host 127.0.0.1</vertxOption>	<!-- apis-main の start.sh -->
+				</apis-main>
+			</start>
+			<watchdog>
+				<enabled>false</enabled>	<!-- apis-main の config.json の watchdog.enabled -->
+			</watchdog>
+			<batteryCapacityManagement>
+				<enabled>false</enabled>	<!-- apis-main の config.json の batteryCapacityManagement.enabled -->
+			</batteryCapacityManagement>
+		</cop>
+	</copList>
+</community>

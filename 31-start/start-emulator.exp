@@ -1,0 +1,23 @@
+#!/usr/bin/expect
+
+set ADDRESS [lindex $argv 0]
+set USERNAME [lindex $argv 1]
+set PASSWORD [lindex $argv 2]
+set MASTER_KEY [lindex $argv 3]
+set TIMEOUT 15
+
+set timeout -1
+
+spawn env LANG=C ssh -o ConnectTimeout=${TIMEOUT} -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ${MASTER_KEY} ${USERNAME}@${ADDRESS} "cd apis-emulator && sh stop.sh && . venv/bin/activate && ./startEmul.py 4 &"
+expect {
+	-glob "assword:" {
+		set timeout ${TIMEOUT}
+		send -- "${PASSWORD}\n"
+		exp_continue
+	}
+	-glob "\\\[startEmul\\\]" {
+		set timeout ${TIMEOUT}
+		send "exit\n"
+	}
+	expect eof
+}
