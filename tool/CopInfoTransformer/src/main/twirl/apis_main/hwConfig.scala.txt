@@ -1,0 +1,46 @@
+@import scala.xml.Node
+
+@(cop: Node)
+
+{
+	"#" : "place this file at the path defined by 'hwConfigFile' in config file",
+
+	"refreshingPeriodMsec" : @((cop \ "hwConfig" \ "refreshingPeriodMsec").text),
+
+	"batteryNominalCapacityWh" : @((cop \ "hwConfig" \ "batteryNominalCapacityWh").text),
+	"gridCurrentCapacityA" : @((cop \ "hwConfig" \ "gridCurrentCapacityA").text),
+	"gridCurrentAllowanceA" : @((cop \ "hwConfig" \ "gridCurrentAllowanceA").text),
+	"droopRatio" : @((cop \ "hwConfig" \ "droopRatio").text),
+	"efficientBatteryGridVoltageRatio" : @((cop \ "hwConfig" \ "efficientBatteryGridVoltageRatio").text),
+
+	"safety" : {
+		"range" : {
+			"dcdc" : {
+				"meter" : {
+					"tmp" : {
+						"min" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "tmp" \ "min").text),
+						"max" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "tmp" \ "max").text)
+					},
+					"vg" : {
+						"min" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "vg" \ "min").text),
+						"max" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "vg" \ "max").text)
+					},
+					"vb" : {
+						"min" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "vb" \ "min").text),
+						"max" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "vb" \ "max").text)
+					},
+					"ig" : {
+						"min" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "ig" \ "min").text),
+						"max" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "ig" \ "max").text)
+					},
+					"ib" : {
+						"min" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "ib" \ "min").text),
+						"max" : @((cop \ "hwConfig" \ "safety" \ "range" \ "dcdc" \ "meter" \ "ib" \ "max").text)
+					}
+				}
+			}
+		}
+	},
+
+	"#" : "end"
+}
