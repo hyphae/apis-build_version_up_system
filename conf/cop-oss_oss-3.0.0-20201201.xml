@@ -47,7 +47,7 @@
 	<fileSystemExclusiveLockFileFormat>{tmpdir}/.apis.%s.lock</fileSystemExclusiveLockFileFormat>	<!-- apis-main の config.json の fileSystemExclusiveLockFileFormat -->
 	<connection>
 		<emulator>
-			<host>192.168.0.29</host>	<!-- apis-main の config.json の connection.emulator.host -->
+			<host>192.168.3.126</host>	<!-- apis-main の config.json の connection.emulator.host -->
 			<port>4390</port>	<!-- apis-main の config.json の connection.emulator.port -->
 		</emulator>
 		<dcdc_controller>
@@ -62,7 +62,7 @@
 			<enabled>true</enabled>	<!-- apis-ccc の config.json の dealReporting.enabled -->
 			<periodMsec>30000</periodMsec>	<!-- apis-ccc の config.json の dealReporting.periodMsec -->
 			<type>mongo_db</type>	<!-- apis-ccc の config.json の dealReporting.type -->
-			<host>192.168.0.29</host>	<!-- apis-ccc の config.json の dealReporting.host -->
+			<host>192.168.3.126</host>	<!-- apis-ccc の config.json の dealReporting.host -->
 			<port>27018</port>	<!-- apis-ccc の config.json の dealReporting.port -->
 			<ssl>false</ssl>	<!-- apis-ccc の config.json の dealReporting.ssl -->
 			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の dealReporting.sslTrustAll -->
@@ -75,7 +75,7 @@
 			<enabled>true</enabled>	<!-- apis-ccc の config.json の unitDataReporting.enabled -->
 			<periodMsec>30000</periodMsec>	<!-- apis-ccc の config.json の unitDataReporting.periodMsec -->
 			<type>mongo_db</type>	<!-- apis-ccc の config.json の unitDataReporting.type -->
-			<host>192.168.0.29</host>	<!-- apis-ccc の config.json の unitDataReporting.host -->
+			<host>192.168.3.126</host>	<!-- apis-ccc の config.json の unitDataReporting.host -->
 			<port>27018</port>	<!-- apis-ccc の config.json の unitDataReporting.port -->
 			<ssl>false</ssl>	<!-- apis-ccc の config.json の unitDataReporting.ssl -->
 			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の unitDataReporting.sslTrustAll -->
@@ -86,7 +86,7 @@
 		</unitDataReporting>
 		<scenarioAcquisition>
 			<enabled>true</enabled>	<!-- apis-ccc の config.json の scenarioAcquisition.enabled -->
-			<host>192.168.0.29</host>	<!-- apis-ccc の config.json の scenarioAcquisition.host -->
+			<host>192.168.3.126</host>	<!-- apis-ccc の config.json の scenarioAcquisition.host -->
 			<port>8000</port>	<!-- apis-ccc の config.json の scenarioAcquisition.port -->
 			<ssl>false</ssl>	<!-- apis-ccc の config.json の scenarioAcquisition.ssl -->
 			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の scenarioAcquisition.sslTrustAll -->
@@ -95,7 +95,7 @@
 		</scenarioAcquisition>
 		<policyAcquisition>
 			<enabled>false</enabled>	<!-- apis-ccc の config.json の policyAcquisition.enabled -->
-			<host>192.168.0.29</host>	<!-- apis-ccc の config.json の policyAcquisition.host -->
+			<host>192.168.3.126</host>	<!-- apis-ccc の config.json の policyAcquisition.host -->
 			<port>8000</port>	<!-- apis-ccc の config.json の policyAcquisition.port -->
 			<ssl>false</ssl>	<!-- apis-ccc の config.json の policyAcquisition.ssl -->
 			<sslTrustAll>false</sslTrustAll>	<!-- apis-ccc の config.json の policyAcquisition.sslTrustAll -->
@@ -218,7 +218,7 @@
 		<mongoDb>
 			<enabled>true</enabled>	<!-- apis-log の config.json の mongoDbWriter.enabled -->
 			<level>INFO</level>	<!-- apis-log の config.json の mongoDbWriter.level -->
-			<host>192.168.0.29</host>	<!-- apis-log の config.json の mongoDbWriter.host -->
+			<host>192.168.3.126</host>	<!-- apis-log の config.json の mongoDbWriter.host -->
 			<port>27018</port>	<!-- apis-log の config.json の mongoDbWriter.port -->
 			<ssl>false</ssl>	<!-- apis-log の config.json の mongoDbWriter.ssl -->
 			<sslTrustAll>false</sslTrustAll>	<!-- apis-log の config.json の mongoDbWriter.sslTrustAll -->
@@ -425,7 +425,7 @@
 		]]></content>	<!-- scenario.json ( 直で ) -->
 	</scenario>
 	<firstCop>
-		<hostName>192.168.0.30</hostName>
+		<hostName>192.168.3.125</hostName>
 		<account>oesunit</account>
 		<cluster>
 			<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
@@ -434,7 +434,7 @@
 				<network>
 					<interfaces>
 						<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/interfaces/@enabled -->
-						<interface>192.168.0.30</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
+						<interface>192.168.3.125</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
 					</interfaces>
 				</network>
 			</hazelcast>
@@ -442,11 +442,11 @@
 		<start>
 			<apis-web>
 				<jvmOption></jvmOption>	<!-- apis-web の start.sh -->
-				<vertxOption>-cluster-host 192.168.0.30</vertxOption>	<!-- apis-web の start.sh -->
+				<vertxOption>-cluster-host 192.168.3.125</vertxOption>	<!-- apis-web の start.sh -->
 			</apis-web>
 			<apis-ccc>
 				<jvmOption></jvmOption>	<!-- apis-ccc の start.sh -->
-				<vertxOption>-cluster-host 192.168.0.30</vertxOption>	<!-- apis-ccc の start.sh -->
+				<vertxOption>-cluster-host 192.168.3.125</vertxOption>	<!-- apis-ccc の start.sh -->
 			</apis-ccc>
 			<apis-log>
 				<jvmOption></jvmOption>	<!-- apis-log の start.sh -->
@@ -467,7 +467,7 @@
 	</firstCop>
 	<copList>
 		<cop>
-			<hostName>192.168.0.31</hostName>
+			<hostName>192.168.3.124</hostName>
 			<account>oesunit</account>
 			<cluster>
 				<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
@@ -476,7 +476,7 @@
 					<network>
 						<interfaces>
 							<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/interfaces/@enabled -->
-							<interface>192.168.0.31</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
+							<interface>192.168.3.124</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
 						</interfaces>
 					</network>
 				</hazelcast>
@@ -528,7 +528,7 @@
 			<start>
 				<apis-main>
 					<jvmOption></jvmOption>	<!-- apis-main の start.sh -->
-					<vertxOption>-cluster-host 192.168.0.31</vertxOption>	<!-- apis-main の start.sh -->
+					<vertxOption>-cluster-host 192.168.3.124</vertxOption>	<!-- apis-main の start.sh -->
 				</apis-main>
 			</start>
 			<watchdog>
@@ -539,7 +539,7 @@
 			</batteryCapacityManagement>
 		</cop>
 		<cop>
-			<hostName>192.168.0.32</hostName>
+			<hostName>192.168.3.123</hostName>
 			<account>oesunit</account>
 			<cluster>
 				<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
@@ -548,7 +548,7 @@
 					<network>
 						<interfaces>
 							<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/interfaces/@enabled -->
-							<interface>192.168.0.32</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
+							<interface>192.168.3.123</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
 						</interfaces>
 					</network>
 				</hazelcast>
@@ -600,7 +600,7 @@
 			<start>
 				<apis-main>
 					<jvmOption></jvmOption>	<!-- apis-main の start.sh -->
-					<vertxOption>-cluster-host 192.168.0.32</vertxOption>	<!-- apis-main の start.sh -->
+					<vertxOption>-cluster-host 192.168.3.123</vertxOption>	<!-- apis-main の start.sh -->
 				</apis-main>
 			</start>
 			<watchdog>
@@ -611,7 +611,7 @@
 			</batteryCapacityManagement>
 		</cop>
 		<cop>
-			<hostName>192.168.0.33</hostName>
+			<hostName>192.168.3.122</hostName>
 			<account>oesunit</account>
 			<cluster>
 				<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
@@ -620,7 +620,7 @@
 					<network>
 						<interfaces>
 							<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/interfaces/@enabled -->
-							<interface>192.168.0.33</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
+							<interface>192.168.3.122</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
 						</interfaces>
 					</network>
 				</hazelcast>
@@ -672,7 +672,7 @@
 			<start>
 				<apis-main>
 					<jvmOption></jvmOption>	<!-- apis-main の start.sh -->
-					<vertxOption>-cluster-host 192.168.0.33</vertxOption>	<!-- apis-main の start.sh -->
+					<vertxOption>-cluster-host 192.168.3.122</vertxOption>	<!-- apis-main の start.sh -->
 				</apis-main>
 			</start>
 			<watchdog>
@@ -683,7 +683,7 @@
 			</batteryCapacityManagement>
 		</cop>
 		<cop>
-			<hostName>192.168.0.34</hostName>
+			<hostName>192.168.3.121</hostName>
 			<account>oesunit</account>
 			<cluster>
 				<!-- ベタベタに Hazelcast の cluster.xml ママの要素名になってしまった... -->
@@ -692,7 +692,7 @@
 					<network>
 						<interfaces>
 							<enabled>true</enabled>	<!-- cluster.xml の /hazelcast/network/interfaces/@enabled -->
-							<interface>192.168.0.34</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
+							<interface>192.168.3.121</interface>	<!-- cluster.xml の /hazelcast/network/interfaces/interface -->
 						</interfaces>
 					</network>
 				</hazelcast>
@@ -744,7 +744,7 @@
 			<start>
 				<apis-main>
 					<jvmOption></jvmOption>	<!-- apis-main の start.sh -->
-					<vertxOption>-cluster-host 192.168.0.34</vertxOption>	<!-- apis-main の start.sh -->
+					<vertxOption>-cluster-host 192.168.3.121</vertxOption>	<!-- apis-main の start.sh -->
 				</apis-main>
 			</start>
 			<watchdog>
