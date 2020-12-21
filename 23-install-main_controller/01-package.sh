@@ -4,15 +4,15 @@ DIR=`dirname $0`
 BASEDIR=$DIR/..
 
 DO_MAIN() {
+	cd ${WORK_DIR}
 	tar \
-	 --cd ${WORK_DIR} \
 	 --exclude .git \
 	 --exclude venv \
 	 --exclude '.*' \
 	 --exclude __pycache__ \
 	 --exclude '*.pyc' \
 	 -czvf \
-	 ${WORK_DIR}/apis-main_controller.tar.gz \
+	 apis-main_controller.tar.gz \
 	 apis-main_controller
 }
 

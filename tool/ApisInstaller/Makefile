@@ -130,7 +130,7 @@ ${apisLogTarGz}: ${apisLogTarGzSrc}
 ${copInfoTransformerTarGz}:
 	cd ../CopInfoTransformer && make clean package
 ${copInfoTransformer}: ${copInfoTransformerTarGz}
-	${tar} ${copInfoTransformerTarGz} --cd ${workDir}
+	cat ${copInfoTransformerTarGz} | ( cd ${workDir} && ${tar} - )
 
 ${exp}: ${stopExp} ${killExp} ${stopKillExp} ${versionupExp} ${setupfilesExp} ${keycertExp} ${verifyExp} ${startExp} ${retrievelogsExp} ${clearalarmExp}
 
