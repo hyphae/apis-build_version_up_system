@@ -63,13 +63,14 @@ expect {
 	}
 	-glob "${Prompt}" {
 		set timeout ${TIMEOUT}
-		send "sudo rm -rf apis-dcdc_batt_comm\n"
-		expect {
-			-glob "assword for " {
-				set timeout ${TIMEOUT}
-				send -- "${PASSWORD}\n"
-			}
-		}
+#		send "sudo rm -rf apis-dcdc_batt_comm\n"
+		send "rm -rf apis-dcdc_batt_comm\n"
+#		expect {
+#			-glob "assword for " {
+#				set timeout ${TIMEOUT}
+#				send -- "${PASSWORD}\n"
+#			}
+#		}
 	}
 }
 
