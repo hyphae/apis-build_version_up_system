@@ -12,7 +12,7 @@ Refer to the apis-build_version_up_system specifications for preparation of IoT 
 
 ## Installation
 Here is how to use apis-build_version_up_system.  
-Do not include any non-English characters in the path of the folder where you will download the source code by git clone.
+Do not include any non-English characters in the path of the folder where you will clone the repository by git clone.
 
 ```bash
 $ git clone https://github.com/SonyCSL/apis-build_version_up_system.git
