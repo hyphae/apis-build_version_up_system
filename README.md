@@ -6,7 +6,7 @@ The apis-build_version_up_system clones all of the software needed to build the 
 ![キャプチャ](https://user-images.githubusercontent.com/71874910/105286005-d3e5c580-5bf8-11eb-9cb2-73c57a14724e.PNG)
 
 ## Preparation  
-git, maven, groovy, expect and JDK must be installed in advance.
+git, maven, groovy, expect and JDK must be installed in advance.  
 Refer to the apis-build_version_up_system specifications for preparation of IoT Boards
 
 
