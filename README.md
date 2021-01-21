@@ -19,7 +19,7 @@ $ make install
 ```
 
 ## Running
-Here is how to run APIS environment.  
+Here is how to run APIS evaluation environment.  
 ```bash
 $ cd apis-build_version_up_system
 $ make start
@@ -27,7 +27,7 @@ $ make start
 
 
 ## Stopping
-Here is how to stop APIS environment.  
+Here is how to stop APIS evaluation environment.  
 ```bash
 $ cd apis-build_version_up_system
 $ make stop
