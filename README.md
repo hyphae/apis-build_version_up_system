@@ -5,10 +5,13 @@ The apis-build_version_up_system clones all of the software needed to build the 
 
 ![キャプチャ](https://user-images.githubusercontent.com/71874910/105286005-d3e5c580-5bf8-11eb-9cb2-73c57a14724e.PNG)
 
+## Preparation  
+
+
 ## Installation
 git cloneを実施しソースコード一式をダウンロードするフォルダのパスに英語以外の文字を含まないこと。  
 
-Here is how to install apis-build_version_up_system.  
+Here is how to install apis-build_version_up_system and clone all of the software needed to build the APIS evaluation environment.  
 git, maven, groovy, expect and JDK must be installed in advance.
 
 ```bash
