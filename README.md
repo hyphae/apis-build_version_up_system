@@ -28,15 +28,12 @@ $ cd apis-build_version_up_system
 $ make start
 ```  
 
-
 ## Stopping
 Here is how to stop APIS evaluation environment.  
 ```bash
 $ cd apis-build_version_up_system
 $ make stop
 ```  
-
-## Parameter Setting
 
 <a id="anchor1"></a>
 ## Documentation
