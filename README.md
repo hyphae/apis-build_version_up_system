@@ -6,12 +6,32 @@ The apis-build_version_up_system clones all of the software needed to build the 
 ![キャプチャ](https://user-images.githubusercontent.com/71874910/105286005-d3e5c580-5bf8-11eb-9cb2-73c57a14724e.PNG)
 
 ## Installation
-git cloneを実施しソースコード一式をダウンロードするフォルダのパスに英語以外の文字を含まないこと。
+git cloneを実施しソースコード一式をダウンロードするフォルダのパスに英語以外の文字を含まないこと。  
+
+Here is how to install apis-build_version_up_system.  
+git, maven, groovy, expect and JDK must be installed in advance.
+
+```bash
+$ git clone https://github.com/SonyCSL/apis-build_version_up_system.git
+$ cd apis-build_version_up_system
+$ make prepare
+$ make install
+```
 
 ## Running
+Here is how to run APIS environment.  
+```bash
+$ cd apis-build_version_up_system
+$ make start
+```  
 
 
 ## Stopping
+Here is how to stop APIS environment.  
+```bash
+$ cd apis-build_version_up_system
+$ make stop
+```  
 
 ## Parameter Setting
 
