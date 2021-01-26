@@ -127,7 +127,6 @@ shutdown: The following processing is executed.<br>
 &emsp;91-shutdown/main.sh<br />
 clean: The following processing is executed.<br>
 &emsp;99-clean/main.sh</p></td>
-<td></td>
 </tr>
 <tr class="odd">
 <td rowspan="3">00-util</td>
