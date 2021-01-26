@@ -2192,7 +2192,7 @@ apis-build\_version\_up\_systemが動作するPCと各ノード(ZERO, FIRST, COP
 
 また、それらのPCと各ノードのIoT BoardはRouterに接続され、Internet経由でそれぞれgithubや各種ソフトウェアのダウンロードサイトへアクセスできるように設定されていることを想定している。
 
-![](media/media/image3.png)
+![](media/media/image3.png)  
 図7-1
 
 
