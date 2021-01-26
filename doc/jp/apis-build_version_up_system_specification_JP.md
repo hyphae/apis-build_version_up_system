@@ -384,8 +384,7 @@ apis-build\_version\_up\_systemフォルダに収められているフォルダ�
 2. cd apis-main_controllerを実行する。<br />
 3. sh stop.shを実行する。<br />
 4. . venv/bin/activateを実行する。<br />
-5. ./startMain.pyを実行してapis-main_controllerを</p>
-<p>起動する。</p></td>
+5. ./startMain.pyを実行してapis-main_controllerを起動する。</p></td>
 </tr>
 <tr class="odd">
 <td>start-emulator.exp</td>
