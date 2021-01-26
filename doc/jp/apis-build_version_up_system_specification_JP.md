@@ -227,7 +227,7 @@ apis-build\_version\_up\_systemフォルダに収められているフォルダ�
 <td>
 1. /00-util/main.shを実行し、ディレクトリのアドレスやcop-*.xml、各種設定を読み込む。<br>
 2. DO_MAIN :<br>
-&emsp;/00-util/load_master.shを実行し、ssh-agentに/key以下の秘密鍵を渡す。
+&emsp;/00-util/load_master.shを実行し、ssh-agentに/key以下の秘密鍵を渡す。<br>
 3. DO_WITH_MASTER_KEY :
 &emsp;/00-util/loop_target_key.shを実行し、/work/target-list.txtから公開鍵を書き込む。
 &emsp;ノード情報を取得する。
