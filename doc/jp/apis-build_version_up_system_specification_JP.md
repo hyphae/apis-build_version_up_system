@@ -257,7 +257,7 @@ apis-build\_version\_up\_systemフォルダに収められているフォルダ�
 <p>Installer.sh</p></td>
 <td><p>
 1. /00-util/main.shを実行し、ディレクトリのアドレスやcop-*.xml、各種設定を読み込む。<br>
-2. /tool/ApisInstallerへ移動し、make cleanLog cleanDerived stop-kill versionup setupfiles keycert verify を実行する。
+2. /tool/ApisInstallerへ移動し、make cleanLog cleanDerived stop-kill versionup setupfiles keycert verify を実行する。<br>
 &emsp;2-1. cleanLog : /tool/ApisInstaller/logへ移動し、rm -rf *.logを実行する。<br />
 &emsp;2-2. cleanDerived : /tool/ApisInstaller/workへ移動し、すべてのファイルを削除する。<br />
 &emsp;2-3. stop-kill : main-default.groovy, tool-default.groovy(引数 xxxStopKillExp)を使用して各ノード上で動作する apis-main, apis-web,apis-ccc, apis-logのプロセスを止める。<br>
