@@ -39,7 +39,8 @@ $ make stop
 <a id="anchor1"></a>
 ## Documentation
 
-
+&emsp;[apis-build_version_up_system_specificaton(EN)](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/doc/en/apis-build_version_up_system_specification_EN.md)  
+&emsp;[apis-build_version_up_system_specificaton(JP)](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/doc/jp/apis-build_version_up_system_specification_JP.md)
 
 ## License
 &emsp;[Apache License Version 2.0](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/LICENSE)
