@@ -110,7 +110,7 @@ apis-build\_version\_up\_systemフォルダに収められているフォルダ�
 <td colspan="2">Makefile</td>
 <td><p>apis-build_version_up_systemのMakefile。</p>
 <p>以下にメインで使用するMakefileのTargetを記載する。</p>
-<>prepare : 以下の処理を実行する。<br>
+<p>prepare : 以下の処理を実行する。<br>
 &emsp;11-prepare/main.sh<br />
 &emsp;12-generate-target-list/main.sh<br />
 &emsp;13-distribute-keys/main.sh<br />
