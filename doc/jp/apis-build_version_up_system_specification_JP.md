@@ -1,6 +1,6 @@
 **apis-build\_version\_up\_system**
 =====
-**Rev 0.6**
+**Rev 0.61**
 
 # **目次**
 - [**apis-build\_version\_up\_system**](#apis-build_version_up_system)
@@ -2073,7 +2073,7 @@ apis-main等が動作するノード(COP)のIoT Boardを1台追加する場合�
 
 ## **5.2. installer.confファイルについて**
 
-/config/installer.confは各ノードにAPIS関連のソフトウェアをInstallする際に必要な情報について記載する。
+/conf/installer.confは各ノードにAPIS関連のソフトウェアをInstallする際に必要な情報について記載する。
 
 |||
 | -------------------- | -------------------------------------------------------------------- |
@@ -2180,7 +2180,7 @@ apis-main等が動作するノード(COP)のIoT Boardを1台追加する場合�
 
 ## **7.2. Configrationファイルの準備例**
 
-apis-build\_version\_up\_systemの/config以下のcop-\*.xml とinstaller.confを”5. Configurationファイルについて“を参照し自身の環境に合うように修正する。DefaultのAPIS評価環境設定は “7.3 IoT BoardへのInstall環境例”の図7-1を想定しており、ノード(COP)の台数やIP Addressを修正する際は各ファイルの修正が必要となる。ノード(COP)数を1台追加する場合はcop-\*.xml の\<copList\> ～\</copList\>中の\<cop\> ～ \</cop\>間の情報を複製し情報を追記することで実現する。
+apis-build\_version\_up\_systemの/conf以下のcop-\*.xml とinstaller.confを”5. Configurationファイルについて“を参照し自身の環境に合うように修正する。DefaultのAPIS評価環境設定は “7.3 IoT BoardへのInstall環境例”の図7-1を想定しており、ノード(COP)の台数やIP Addressを修正する際は各ファイルの修正が必要となる。ノード(COP)数を1台追加する場合はcop-\*.xml の\<copList\> ～\</copList\>中の\<cop\> ～ \</cop\>間の情報を複製し情報を追記することで実現する。
 
 <br>
 
