@@ -1,6 +1,6 @@
 **apis-build\_version\_up\_system**
 =====
-**Rev 0.6**
+**Rev 0.61**
 
 # **CONTENTS**
 - [**apis-build\_version\_up\_system**](#apis-build_version_up_system)
@@ -2062,7 +2062,7 @@ and the apis-main, apis-web, apis-ccc, and apis-log logging.properties file jp.c
 
 ## **5.2. The installer.conf file**
 
-The /config/installer.conf file contains the information required for installing software related to APIS in each node.
+The /conf/installer.conf file contains the information required for installing software related to APIS in each node.
 
 |||
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -2169,7 +2169,7 @@ openjdk version "11.0.9.1" 2020-11-04
 
 ## **7.2. Configuration file preparation example**
 
-Refer to section 5, “Configuration Files” and revise the cop-\*.xml and installer.conf files located under the /config folder of apis-build\_version\_up\_system to suit your own environment. The default APIS evaluation environment assumes the configuration illustrated in Figure 7-1 of section 7.3, “Example of installation on an IoT board.” When changing the number of COP nodes or the IP addresses, the files must be revised. To add one COP node, copy the information between the \<cop\> and \</cop\> tags, which are found between the \<copList\> and \</copList\> tags in the cop-\*.xml file and add the information for the new node.
+Refer to section 5, “Configuration Files” and revise the cop-\*.xml and installer.conf files located under the /conf folder of apis-build\_version\_up\_system to suit your own environment. The default APIS evaluation environment assumes the configuration illustrated in Figure 7-1 of section 7.3, “Example of installation on an IoT board.” When changing the number of COP nodes or the IP addresses, the files must be revised. To add one COP node, copy the information between the \<cop\> and \</cop\> tags, which are found between the \<copList\> and \</copList\> tags in the cop-\*.xml file and add the information for the new node.
 
 <br>
 
