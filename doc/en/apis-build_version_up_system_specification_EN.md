@@ -2122,7 +2122,7 @@ Information on the software used by Build & Version Up System and its open-sourc
 The following explanation is for the example of a Raspberry Pi 3B and Debian Buster 10 environment.
 
 1.  Obtain a Debian Buster10 image, write it to an SD card, and boot it up.  
-     http://ftp.jaist.ac.jp/pub/raspberrypi/raspios\_arm64/images/raspios\_arm64-2020-08-24/
+     http://ftp.jaist.ac.jp/pub/raspberrypi/raspios_arm64/images/raspios_arm64-2020-08-24/
 
 2.  Enable ssh.  
    Select the following from the menu icon on the top left of the desktop  
