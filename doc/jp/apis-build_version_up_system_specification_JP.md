@@ -2133,7 +2133,7 @@ apis-main等が動作するノード(COP)のIoT Boardを1台追加する場合�
 以下にRaspberry Pi 3B 及び Debian Buster 10での環境構築例について説明する。
 
 1.  Debian Buster10 Imageを取得してSD Cardに書き込みOSを起動する。  
-   http://ftp.jaist.ac.jp/pub/raspberrypi/raspios\_arm64/images/raspios\_arm64-2020-08-24/
+   http://ftp.jaist.ac.jp/pub/raspberrypi/raspios_arm64/images/raspios_arm64-2020-08-24/
 
 2.  sshを有効にする。  
    Desktopの左上のアイコンマークから以下を実施する。  
