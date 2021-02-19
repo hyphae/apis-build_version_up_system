@@ -16,7 +16,7 @@ Do not include any non-English characters in the path of the folder where you wi
 Execute "make prepare" command after completing the preparation of IoT Board side. 
 
 ```bash
-$ git clone https://github.com/SonyCSL/apis-build_version_up_system.git
+$ git clone https://github.com/hyphae/apis-build_version_up_system.git
 $ cd apis-build_version_up_system
 $ make prepare
 $ make install
@@ -39,12 +39,12 @@ $ make stop
 <a id="anchor1"></a>
 ## Documentation
 
-&emsp;[apis-build_version_up_system_specificaton(EN)](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/doc/en/apis-build_version_up_system_specification_EN.md)  
-&emsp;[apis-build_version_up_system_specificaton(JP)](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/doc/jp/apis-build_version_up_system_specification_JP.md)
+&emsp;[apis-build_version_up_system_specificaton(EN)](https://github.com/hyphae/apis-build_version_up_system/blob/main/doc/en/apis-build_version_up_system_specification_EN.md)  
+&emsp;[apis-build_version_up_system_specificaton(JP)](https://github.com/hyphae/apis-build_version_up_system/blob/main/doc/jp/apis-build_version_up_system_specification_JP.md)
 
 ## License
-&emsp;[Apache License Version 2.0](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/LICENSE)
+&emsp;[Apache License Version 2.0](https://github.com/hyphae/apis-build_version_up_system/blob/main/LICENSE)
 
 
 ## Notice
-&emsp;[Notice](https://github.com/SonyCSL/apis-build_version_up_system/blob/main/NOTICE.md)
+&emsp;[Notice](https://github.com/hyphae/apis-build_version_up_system/blob/main/NOTICE.md)
